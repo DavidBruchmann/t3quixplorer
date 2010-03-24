@@ -39,22 +39,22 @@
 
 ****************************************************************/
 
-require_once ("t3quixplorer_div.php");
+require_once ('t3quixplorer_div.php');
 
 class t3quixplorer_download{
 	
 	function main($dir, $item) {		// download file
 		global $LANG,$CLIENT;
 		
-		if(!t3quixplorer_div::get_is_file($dir,$item)) t3quixplorer_div::showError($item.": ".$LANG->getLL("error.fileexist"));
-		if(!t3quixplorer_div::get_show_item($dir, $item)) t3quixplorer_div::showError($item.": ".$LANG->getLL("error.accessfile"));
+		if(!t3quixplorer_div::get_is_file($dir,$item)) t3quixplorer_div::showError($item.': '.$LANG->getLL('error.fileexist'));
+		if(!t3quixplorer_div::get_show_item($dir, $item)) t3quixplorer_div::showError($item.': '.$LANG->getLL('error.accessfile'));
 		
 		$abs_item = t3quixplorer_div::get_abs_item($dir,$item);
-		header('Content-Type: '.(($CLIENT["BROWSER"]=='msie' || $CLIENT["BROWSER"]=='opera')?'application/octetstream':'application/octet-stream'));
+		header('Content-Type: '.(($CLIENT['BROWSER']=='msie' || $CLIENT['BROWSER']=='opera')?'application/octetstream':'application/octet-stream'));
 		header('Expires: '.gmdate('D, d M Y H:i:s').' GMT');
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Length: '.filesize($abs_item));
-		if($CLIENT["BROWSER"]=='msie') {
+		if($CLIENT['BROWSER']=='msie') {
 			header('Content-Disposition: inline; filename="'.$item.'"');
 			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 			header('Pragma: public');
@@ -70,8 +70,8 @@ class t3quixplorer_download{
 }
 
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_download.php"])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_download.php"]);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_download.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_download.php']);
 }
 
 ?>

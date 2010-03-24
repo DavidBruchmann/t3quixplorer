@@ -38,8 +38,8 @@
 	 http://quixplorer.sourceforge.net
 
 ****************************************************************/
-require_once("t3quixplorer_div.php");
-require_once("t3quixplorer_zipfile.php");
+require_once('t3quixplorer_div.php');
+require_once('t3quixplorer_zipfile.php');
 
 
 class t3quixplorer_archive{
@@ -50,26 +50,26 @@ class t3quixplorer_archive{
 		$content = array();
 		
 		
-		if(t3lib_div::_POST("name")) {
-			$name=basename(stripslashes(t3lib_div::_POST("name")));
-			if($name=="") t3quixplorer_div::showError($LANG->getLL("error.miscnoname"));
-			switch(t3lib_div::_POST("type")) {
-				case "zip":	
+		if(t3lib_div::_POST('name')) {
+			$name=basename(stripslashes(t3lib_div::_POST('name')));
+			if($name=='') t3quixplorer_div::showError($LANG->getLL('error.miscnoname'));
+			switch(t3lib_div::_POST('type')) {
+				case 'zip':	
 					$this->zip_items($dir,$name);	
 					break;
 				default:	
 					$this->zip_items($dir,$name);
 					break;
 			}
-			header("Location: ".t3quixplorer_div::make_link("list",$dir,NULL));
+			header('Location: '.t3quixplorer_div::make_link('list',$dir,NULL));
 		}
 		
 		$content[] = '
 			<br />
-			  <form name="archform" method="post" action="'.t3quixplorer_div::make_link("arch",$dir,NULL).'">
+			  <form name="archform" method="post" action="'.t3quixplorer_div::make_link('arch',$dir,NULL).'">
 			 ';
 		
-		$selitems = t3lib_div::_POST("selitems");
+		$selitems = t3lib_div::_POST('selitems');
 		
 		$cnt=count($selitems);
 		for($i=0;$i<$cnt;++$i) {
@@ -79,11 +79,11 @@ class t3quixplorer_archive{
 		$content[] = '
 			<table width="300">
 			  <tr>
-			    <td>'.$LANG->getLL("message.nameheader").':</td>
+			    <td>'.$LANG->getLL('message.nameheader').':</td>
 				<td align="right"><input type="text" name="name" size="25"></td>
 			  </tr>
 			  <tr>
-			    <td>'.$LANG->getLL("message.typeheader").':</td>
+			    <td>'.$LANG->getLL('message.typeheader').':</td>
 				<td align="right">
 				  <select name="type">
 				    <option value="zip">zip</option>
@@ -93,15 +93,15 @@ class t3quixplorer_archive{
 		      <tr>
 			    <td> </td>
 				<td align="right">
-				  <input type="submit" value="'.$LANG->getLL("message.btncreate").'">
-				  <input type="button" value="'.$LANG->getLL("message.btncancel").'" onClick="javascript:location=\''.t3quixplorer_div::make_link("list",$dir,NULL).'\';">
+				  <input type="submit" value="'.$LANG->getLL('message.btncreate').'">
+				  <input type="button" value="'.$LANG->getLL('message.btncancel').'" onClick="javascript:location=\''.t3quixplorer_div::make_link('list',$dir,NULL).'\';">
 				</td>
 			  </tr>
 			 </form>
 			 </table>
 			 <br />';
 			 
-		return implode("",$content);
+		return implode('',$content);
 	}
 
 	
@@ -109,27 +109,27 @@ class t3quixplorer_archive{
 	function zip_items($dir,$name) {
 		global $LANG;
 	
-		$selitems = t3lib_div::_POST("selitems");
+		$selitems = t3lib_div::_POST('selitems');
 	
 		$cnt=count($selitems);
 		$abs_dir=t3quixplorer_div::get_abs_dir($dir);
 		
-		$zipfile=t3lib_div::makeInstance("t3quixplorer_zipfile");
+		$zipfile=t3lib_div::makeInstance('t3quixplorer_zipfile');
 		for($i=0;$i<$cnt;++$i) {
 			$selitem=stripslashes($selitems[$i]);
 			if(!$zipfile->add($abs_dir,$selitem)) {
-				t3quixplorer_div::showError($selitem.": Failed adding item.");
+				t3quixplorer_div::showError($selitem.': Failed adding item.');
 			}
 		}
 		if(!$zipfile->save(t3quixplorer_div::get_abs_item($dir,$name))) {
-			t3quixplorer_div::showError($name.": Failed saving zipfile.");
+			t3quixplorer_div::showError($name.': Failed saving zipfile.');
 		}
 		
-		header("Location: ".t3quixplorer_div::make_link("list",$dir,NULL));
+		header('Location: '.t3quixplorer_div::make_link('list',$dir,NULL));
 	}
 }
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_archive.php"])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_archive.php"]);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_archive.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_archive.php']);
 }
 ?>

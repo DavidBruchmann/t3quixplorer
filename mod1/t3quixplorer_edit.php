@@ -41,18 +41,18 @@
 
 
 
-require_once ("t3quixplorer_div.php");
+require_once ('t3quixplorer_div.php');
 
 class t3quixplorer_edit{
 
 	function savefile($file_name) {			// save edited file
 		global $LANG;
-		$code = t3lib_div::_POST("code");
-		if(t3lib_div::_POST("win_to_unix_br")){
+		$code = t3lib_div::_POST('code');
+		if(t3lib_div::_POST('win_to_unix_br')){
 			$code = str_replace(chr(13).chr(10),chr(10),$code);
 		}
-		$fp = @fopen($file_name, "w");
-		if($fp===false) t3quixplorer_div::showError(basename($file_name).": ".$LANG->getLL("error.savefile"));
+		$fp = @fopen($file_name, 'w');
+		if($fp===false) t3quixplorer_div::showError(basename($file_name).': '.$LANG->getLL('error.savefile'));
 		fputs($fp, $code);
 		@fclose($fp);
 	}
@@ -64,13 +64,13 @@ class t3quixplorer_edit{
 			
 		global $LANG;
 		
-		if(!t3quixplorer_div::get_is_file($dir, $item)) t3quixplorer_div::showError($item.": ".$LANG->getLL("error.fileexists"));
-		if(!t3quixplorer_div::get_show_item($dir, $item)) t3quixplorer_div::showError($item.": ".$LANG->getLL("error.accessfile"));
+		if(!t3quixplorer_div::get_is_file($dir, $item)) t3quixplorer_div::showError($item.': '.$LANG->getLL('error.fileexists'));
+		if(!t3quixplorer_div::get_show_item($dir, $item)) t3quixplorer_div::showError($item.': '.$LANG->getLL('error.accessfile'));
 		$fname = t3quixplorer_div::get_abs_item($dir, $item);
 		$fileinfo = t3lib_div::split_fileref($fname);
 		$ext = $fileinfo['fileext'];
 		
-		$theight = ($GLOBALS["T3Q_VARS"]["textarea_height"] && is_numeric($GLOBALS["T3Q_VARS"]["textarea_height"]))?$GLOBALS["T3Q_VARS"]["textarea_height"]:20;
+		$theight = ($GLOBALS['T3Q_VARS']['textarea_height'] && is_numeric($GLOBALS['T3Q_VARS']['textarea_height']))?$GLOBALS['T3Q_VARS']['textarea_height']:20;
 		
 		
 		$pObj->doc->JScode = '
@@ -88,7 +88,7 @@ class t3quixplorer_edit{
 
 						lineheight = theCode.scrollHeight / splitstr.length;
 						theCode.scrollTop = (linenumber - 1) * lineheight;
-						client="'.$CLIENT["BROWSER"].'";
+						client="'.$CLIENT['BROWSER'].'";
 						if(client=="net"){
 							caretposition = 0;
 							for(i = 0;i < linenumber-1; i++){
@@ -101,7 +101,7 @@ class t3quixplorer_edit{
 					}
 
 					function jumpToLine(linenumber){
-						window.location="'.t3quixplorer_div::make_link("edit",$dir,$item).'#top";
+						window.location="'.t3quixplorer_div::make_link('edit',$dir,$item).'#top";
 						scrollToLine(linenumber);
 					}
 					
@@ -114,7 +114,7 @@ class t3quixplorer_edit{
 
 						lineheight = theCode.scrollHeight / splitstr.length;
 						theCode.scrollTop = (theLineNumber.value - 1) * lineheight;
-						client="'.$CLIENT["BROWSER"].'";
+						client="'.$CLIENT['BROWSER'].'";
 						if(client=="net"){
 							caretposition = 0;
 							for(i = 0;i < theLineNumber.value-1; i++){
@@ -158,7 +158,7 @@ class t3quixplorer_edit{
 					
 					function closeDoc(){
 						
-						window.location=\''.t3quixplorer_div::make_link("list",$dir,NULL).'\';
+						window.location=\''.t3quixplorer_div::make_link('list',$dir,NULL).'\';
 						
 					}					
 					
@@ -170,25 +170,25 @@ class t3quixplorer_edit{
 		
 		$content= array();
 		
-		if(t3lib_div::_POST("dosave") && t3lib_div::_POST("dosave")=="yes") {
+		if(t3lib_div::_POST('dosave') && t3lib_div::_POST('dosave')=='yes') {
 			// Save / Save As
-			$item=basename(stripslashes(t3lib_div::_POST("fname")));
+			$item=basename(stripslashes(t3lib_div::_POST('fname')));
 			$fname2=t3quixplorer_div::get_abs_item($dir, $item);
-			if(!isset($item) || $item=="") t3quixplorer_div::showError($LANG->getLL("error.miscnoname"));
-			if($fname!=$fname2 && @file_exists($fname2)) t3quixplorer_div::showError($item.": ".$LANG->getLL("error.itemdoesexist"));
+			if(!isset($item) || $item=='') t3quixplorer_div::showError($LANG->getLL('error.miscnoname'));
+			if($fname!=$fname2 && @file_exists($fname2)) t3quixplorer_div::showError($item.': '.$LANG->getLL('error.itemdoesexist'));
 			$this->savefile($fname2);
 			$fname=$fname2;
 		}
 		
 		// open file
-		$fp = @fopen($fname, "r");
-		if($fp===false) t3quixplorer_div::showError($item.": ".$LANG->getLL("error.openfile"));
+		$fp = @fopen($fname, 'r');
+		if($fp===false) t3quixplorer_div::showError($item.': '.$LANG->getLL('error.openfile'));
 		@fclose($fp);
 		
 		$fileContent = t3lib_div::getUrl($fname);
 		
 		// header
-		$s_item=t3quixplorer_div::get_rel_item($dir,$item);	if(strlen($s_item)>50) $s_item="...".substr($s_item,-47);
+		$s_item=t3quixplorer_div::get_rel_item($dir,$item);	if(strlen($s_item)>50) $s_item='...'.substr($s_item,-47);
 		
 	
 		
@@ -200,7 +200,7 @@ class t3quixplorer_edit{
 		//$onkeydown = $GLOBALS['T3Q_VARS']['disable_tab'] ? '' : ' onkeydown="return catchTab(this,event)" ';
 
 		$fileinfo = t3lib_div::split_fileref(t3quixplorer_div::get_abs_item($dir,$item));
-		$lang = t3lib_div::_GP("highlight_lang");
+		$lang = t3lib_div::_GP('highlight_lang');
 		$ext = $fileinfo['fileext'];
 
 		if(!$lang){
@@ -209,7 +209,7 @@ class t3quixplorer_edit{
 
 		$content[]= '
 		  <br />
-		    <form id="editfrm" method="post" action="'.t3quixplorer_div::make_link("edit",$dir,$item).'" >
+		    <form id="editfrm" method="post" action="'.t3quixplorer_div::make_link('edit',$dir,$item).'" >
 		    <input type="hidden" name="dosave" value="yes">
 		    <textarea name="code" id="code" rows="'.$theight.'" style="width:740px;" wrap="off" class="enable-tab" >'.t3lib_div::formatForTextarea($fileContent).'</textarea>
 		  ';
@@ -242,16 +242,16 @@ class t3quixplorer_edit{
 				    		<input type="text" name="fname" value="'.$item.'">
 				  		</td>
 		          		<td>
-				    		<input type="button" name="savenow" value="'.$LANG->getLL("message.btnsave").'" onclick="saveDoc();" >
+				    		<input type="button" name="savenow" value="'.$LANG->getLL('message.btnsave').'" onclick="saveDoc();" >
 				  		</td>
 				  		<td>
-				    		<input type="reset" value="'.$LANG->getLL("message.btnreset").'">
+				    		<input type="reset" value="'.$LANG->getLL('message.btnreset').'">
 				  		</td>
 				  		<td>
-		            <input type="button" value="'.$LANG->getLL("message.btnclose").'" onclick="closeDoc()">
+		            <input type="button" value="'.$LANG->getLL('message.btnclose').'" onclick="closeDoc()">
 				  		</td>
 				  		<td>
-		            &nbsp;'.$LANG->getLL("message.btnscroll").' &nbsp;<input type="Text" id="linenumber" name="linenumber" onkeypress="keyhandler(event.keyCode)"  value="'.t3lib_div::_GP("linenumber").'" size="5"> &nbsp;(+ ENTER)
+		            &nbsp;'.$LANG->getLL('message.btnscroll').' &nbsp;<input type="Text" id="linenumber" name="linenumber" onkeypress="keyhandler(event.keyCode)"  value="'.t3lib_div::_GP('linenumber').'" size="5"> &nbsp;(+ ENTER)
               			</td></tr></table><br />';
 
 
@@ -272,7 +272,7 @@ class t3quixplorer_edit{
 			if(is_array($functions) && !empty($functions)){
 				reset($functions);
 				$content[] = '
-				<td>'.$LANG->getLL("message.btnfunction").'<select name="function_index" onchange="jumpToLine(parseInt(this.options[this.selectedIndex].value)+1)"><option value=""></option>
+				<td>'.$LANG->getLL('message.btnfunction').'<select name="function_index" onchange="jumpToLine(parseInt(this.options[this.selectedIndex].value)+1)"><option value=""></option>
 				';
 				foreach($functions as $function){
 					$content[] = '
@@ -294,7 +294,7 @@ class t3quixplorer_edit{
 			    <table>
 			    	<tr>
 			    		<td>
-			    			<input type="checkbox" name="highlight" '.(t3lib_div::_GP("highlight")? ' checked="checked" ' : '').' value="1">&nbsp;'.$LANG->getLL("message.highlight").'
+			    			<input type="checkbox" name="highlight" '.(t3lib_div::_GP('highlight')? ' checked="checked" ' : '').' value="1">&nbsp;'.$LANG->getLL('message.highlight').'
 			    		</td>
 			    		<td>
 			    			<select name="highlight_lang">
@@ -339,15 +339,15 @@ class t3quixplorer_edit{
 				t3lib_div::_GP('highlight_lang') || 
 				(
 					$GLOBALS['T3Q_VARS']['auto_highlight'] && 
-					t3lib_div::inList("php,php3,inc,xml,sql,html,htm,js,pl,css,smarty,ts",$ext )
+					t3lib_div::inList('php,php3,inc,xml,sql,html,htm,js,pl,css,smarty,ts',$ext )
 				)
 			)
 		){
-			require_once ("geshi.php");
+			require_once ('geshi.php');
 			$inputCode = $fileContent;
 
-			if(t3lib_div::_GP("highlight_lang")){
-				$hl = t3lib_div::_GP("highlight_lang");
+			if(t3lib_div::_GP('highlight_lang')){
+				$hl = t3lib_div::_GP('highlight_lang');
 			} else {
 
 				switch($ext){
@@ -408,7 +408,7 @@ class t3quixplorer_edit{
 					break;	
 				case 'ts':
 					require_once(PATH_t3lib.'class.t3lib_tsparser.php');
-					$tsparser = t3lib_div::makeInstance("t3lib_TSparser");
+					$tsparser = t3lib_div::makeInstance('t3lib_TSparser');
 					$tsparser->lineNumberOffset=1;
 					$formattedContent = $tsparser->doSyntaxHighlight($inputCode, array($tsparser->lineNumberOffset), 0);
 					$content[]='<hr />'.$formattedContent;		  
@@ -416,7 +416,7 @@ class t3quixplorer_edit{
 				default:
 					break;
 			}
-		} elseif(!$GLOBALS["T3Q_VARS"]["disable_text"]) {	//show plain text (if not disabled in EM)
+		} elseif(!$GLOBALS['T3Q_VARS']['disable_text']) {	//show plain text (if not disabled in EM)
 			$inputCode = $fileContent;
 			$lines = split("\n",$inputCode);
 			foreach($lines as $k => $v){
@@ -429,15 +429,15 @@ class t3quixplorer_edit{
 		}
 		
 
-		return implode("",$content);
+		return implode('',$content);
 	}
 
 
 
 }
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_edit.php"])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_edit.php"]);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_edit.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_edit.php']);
 }
 
 ?>

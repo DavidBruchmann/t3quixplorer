@@ -31,7 +31,7 @@
 
 
 
-require_once ("t3quixplorer_div.php");
+require_once ('t3quixplorer_div.php');
 
 class t3quixplorer_rename{
 
@@ -42,49 +42,49 @@ class t3quixplorer_rename{
 		global $LANG;
 		$this->content= array();
 
-		if(!t3quixplorer_div::get_show_item($dir, $item)) t3quixplorer_div::showError($item.": ".$LANG->getLL("error.accessfile"));
+		if(!t3quixplorer_div::get_show_item($dir, $item)) t3quixplorer_div::showError($item.': '.$LANG->getLL('error.accessfile'));
 
-		if(t3lib_div::_GP("cancel")){
-			header("Location: ".t3quixplorer_div::make_link("list",$dir,NULL));
+		if(t3lib_div::_GP('cancel')){
+			header('Location: '.t3quixplorer_div::make_link('list',$dir,NULL));
 		}
 
 
-		if(t3lib_div::_GP("dorename") &&  $fname = t3lib_div::_GP("fname")){
-			if(!preg_match('/[a-zA-Z0-9\.-_]+/',$fname)) t3quixplorer_div::showError($fname.": ".$LANG->getLL("error.invalidfilename"));
+		if(t3lib_div::_GP('dorename') &&  $fname = t3lib_div::_GP('fname')){
+			if(!preg_match('/[a-zA-Z0-9\.-_]+/',$fname)) t3quixplorer_div::showError($fname.': '.$LANG->getLL('error.invalidfilename'));
 			$oldname = t3quixplorer_div::get_abs_item($dir, $item);
 			$newname = t3quixplorer_div::get_abs_item($dir, $fname);
 			if(!strlen(trim($newname))){
-				t3quixplorer_div::showError($LANG->getLL("error.miscnoname"));	
+				t3quixplorer_div::showError($LANG->getLL('error.miscnoname'));	
 			}
 
 			if(@file_exists($newname)){
-				 t3quixplorer_div::showError($newname.": ".$LANG->getLL("error.itemdoesexist"));
+				 t3quixplorer_div::showError($newname.': '.$LANG->getLL('error.itemdoesexist'));
 			}
 
 			if(rename($oldname,$newname)){
-				header("Location: ".t3quixplorer_div::make_link("list",$dir,NULL));
+				header('Location: '.t3quixplorer_div::make_link('list',$dir,NULL));
 			} else {
-				t3quixplorer_div::showError($oldname.": ".$LANG->getLL("error.renamefailed"));
+				t3quixplorer_div::showError($oldname.': '.$LANG->getLL('error.renamefailed'));
 			}
 		}
 
 
 
 		$this->content[] = '
-			<br /><br /><form name="renamefrm" method="post" action="'.t3quixplorer_div::make_link("rename",$dir,$item).'">
+			<br /><br /><form name="renamefrm" method="post" action="'.t3quixplorer_div::make_link('rename',$dir,$item).'">
 			'.$dir.'/&nbsp;<input type="text" name="fname" value="'.$item.'" size="30"><br /><br />
 			<input type="submit" value="'.$LANG->getLL('message.btnrename').'" name="dorename">&nbsp;<input type="submit" value="'.$LANG->getLL('message.btncancel').'" name="cancel">
 			</form>
 		';
-		return implode("",$this->content);
+		return implode('',$this->content);
 	}
 
 
 
 }
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_rename.php"])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_rename.php"]);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_rename.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_rename.php']);
 }
 
 ?>

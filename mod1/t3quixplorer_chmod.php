@@ -40,7 +40,7 @@
 ****************************************************************/
 
 
-require_once ("t3quixplorer_div.php");
+require_once ('t3quixplorer_div.php');
 
 class t3quixplorer_chmod{
 
@@ -50,43 +50,43 @@ class t3quixplorer_chmod{
 		$content=array();
 		
 		
-		if(!file_exists(t3quixplorer_div::get_abs_item($dir, $item))) t3quixplorer_div::showError($item.": ".$LANG->getLL("error.fileexist"));
-		if(!t3quixplorer_div::get_show_item($dir, $item)) t3quixplorer_div::showError($item.": ".$LANG->getLL("error.accessfile"));
+		if(!file_exists(t3quixplorer_div::get_abs_item($dir, $item))) t3quixplorer_div::showError($item.': '.$LANG->getLL('error.fileexist'));
+		if(!t3quixplorer_div::get_show_item($dir, $item)) t3quixplorer_div::showError($item.': '.$LANG->getLL('error.accessfile'));
 		
-		if(t3lib_div::_POST("confirm") && t3lib_div::_POST("confirm")=="true") {
+		if(t3lib_div::_POST('confirm') && t3lib_div::_POST('confirm')=='true') {
 			$bin='';
 			for($i=0;$i<3;$i++) for($j=0;$j<3;$j++) {
-				$tmp="r_".$i.$j;
-				if(t3lib_div::_POST($tmp) && t3lib_div::_POST($tmp)=="1" ) $bin.='1';
+				$tmp='r_'.$i.$j;
+				if(t3lib_div::_POST($tmp) && t3lib_div::_POST($tmp)=='1' ) $bin.='1';
 				else $bin.='0';
 			}
 			
 			if(!@chmod(t3quixplorer_div::get_abs_item($dir,$item),bindec($bin))) {
-				t3quixplorer_div::showError($item.": ".$LANG->getLL("error.permchange"));
+				t3quixplorer_div::showError($item.': '.$LANG->getLL('error.permchange'));
 			}
-			header("Location: ".t3quixplorer_div::make_link("link",$dir,NULL));
+			header('Location: '.t3quixplorer_div::make_link('link',$dir,NULL));
 			return;
 		}
 		
 		$mode = t3quixplorer_div::parse_file_perms(t3quixplorer_div::get_file_perms($dir,$item));
-		if($mode===false) t3quixplorer_div::showError($item.": ".$LANG->getLL("error.permread"));
-		$pos = "rwx";
+		if($mode===false) t3quixplorer_div::showError($item.': '.$LANG->getLL('error.permread'));
+		$pos = 'rwx';
 		
-		$s_item=t3quixplorer_div::get_rel_item($dir,$item);	if(strlen($s_item)>50) $s_item="...".substr($s_item,-47);
-		//show_header($GLOBALS["messages"]["actperms"].": /".$s_item);
+		$s_item=t3quixplorer_div::get_rel_item($dir,$item);	if(strlen($s_item)>50) $s_item='...'.substr($s_item,-47);
+		//show_header($GLOBALS['messages']['actperms'].': /'.$s_item);
 		
 	
 		// Form
 		$content[]= '
 		  <br />
 		  <table width="175">
-		    <form method="post" action="'.t3quixplorer_div::make_link("chmod",$dir,$item).'">
+		    <form method="post" action="'.t3quixplorer_div::make_link('chmod',$dir,$item).'">
 			<input type="hidden" name="confirm" value="true">
 		  ';
 			
 		  // print table with current perms & checkboxes to change	
 		  
-		 $permgroups = array(0 => $LANG->getLL("message.miscchmodowner"),1 => $LANG->getLL("message.miscchmodgroup"),2 => $LANG->getLL("message.miscchmodpublic"));
+		 $permgroups = array(0 => $LANG->getLL('message.miscchmodowner'),1 => $LANG->getLL('message.miscchmodgroup'),2 => $LANG->getLL('message.miscchmodpublic'));
 		  
 		for($i=0;$i<3;++$i) {
 			$content[]= '
@@ -97,7 +97,7 @@ class t3quixplorer_chmod{
 				';
 			for($j=0;$j<3;++$j) {
 				$content[]= '<td>'.$pos{$j}.'&nbsp;<input type="checkbox"';
-				if($mode{(3*$i)+$j} != "-") $content[]= ' checked';
+				if($mode{(3*$i)+$j} != '-') $content[]= ' checked';
 				$content[]= ' name="r_'.$i.$j.'" value="1"></td>';
 			}
 			$content[]= '</tr>';
@@ -110,10 +110,10 @@ class t3quixplorer_chmod{
 		  <table>
 		    <tr>
 			  <td>
-			    <input type="submit" value="'.$LANG->getLL("message.btnchange").'">
+			    <input type="submit" value="'.$LANG->getLL('message.btnchange').'">
 			  </td>
 			  <td>
-			    <input type="button" value="'.$LANG->getLL("message.btncancel").'" onClick="javascript:location=\''.t3quixplorer_div::make_link("list",$dir,NULL).'\';">
+			    <input type="button" value="'.$LANG->getLL('message.btncancel').'" onClick="javascript:location=\''.t3quixplorer_div::make_link('list',$dir,NULL).'\';">
 			  </td>
 			</tr>
 		   </form>
@@ -121,11 +121,11 @@ class t3quixplorer_chmod{
 		  <br />';
 		
 		
-		return implode("",$content);
+		return implode('',$content);
 	}
 }
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_chmod.php"])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_chmod.php"]);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_chmod.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_chmod.php']);
 }
 ?>

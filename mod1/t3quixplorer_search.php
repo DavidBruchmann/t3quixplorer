@@ -40,7 +40,7 @@
 
 ****************************************************************/
 
-require_once ("t3quixplorer_div.php");
+require_once ('t3quixplorer_div.php');
 
 class t3quixplorer_search{
 	function find_item($dir,$pat,&$list,$recur) {	// find items
@@ -65,7 +65,7 @@ class t3quixplorer_search{
 	//------------------------------------------------------------------------------
 	function make_list($dir,$item,$subdir) {	// make list of found items
 		// convert shell-wildcards to PCRE Regex Syntax
-		$pat="^".str_replace("?",".",str_replace("*",".*",str_replace(".","\.",$item)))."$";
+		$pat='^'.str_replace('?','.',str_replace('*','.*',str_replace('.',"\.",$item)))."$";
 		
 		// search
 		$this->find_item($dir,$pat,$list,$subdir);
@@ -78,22 +78,22 @@ class t3quixplorer_search{
 
 		if(!is_array($list)) return;
 		
-		$imagepath = t3lib_extMgm::extRelPath("t3quixplorer").'mod1/_img/';
+		$imagepath = t3lib_extMgm::extRelPath('t3quixplorer').'mod1/_img/';
 		
 		$cnt = count($list);
 		for($i=0;$i<$cnt;++$i) {
 			$dir = $list[$i][0];	$item = $list[$i][1];
 			$s_dir=t3lib_div::fixed_lgd($dir,62);	
 			$s_item=t3lib_div::fixed_lgd($item,45);
-			$link = "";	$target = "";
+			$link = '';	$target = '';
 			
 			if(t3quixplorer_div::get_is_dir($dir,$item)) {
-				$img = "folder.gif";
-				$link = t3quixplorer_div::make_link("list",t3quixplorer_div::get_rel_item($dir, $item),NULL);
+				$img = 'folder.gif';
+				$link = t3quixplorer_div::make_link('list',t3quixplorer_div::get_rel_item($dir, $item),NULL);
 			} else {
-				$img = t3quixplorer_div::get_mime_type($dir, $item, "img");
-				$link = $GLOBALS["T3Q_VARS"]["home_url"]."/".t3quixplorer_div::get_rel_item($dir, $item);
-				$target = "_blank";
+				$img = t3quixplorer_div::get_mime_type($dir, $item, 'img');
+				$link = $GLOBALS['T3Q_VARS']['home_url'].'/'.t3quixplorer_div::get_rel_item($dir, $item);
+				$target = '_blank';
 			}
 			
 			$this->content[]='
@@ -103,7 +103,7 @@ class t3quixplorer_search{
 				    <a href="'.$link.'" target="'.$target.'">'.$s_item.'</a>
 				  </td>
 				  <td>
-				    <a href="'.t3quixplorer_div::make_link("list",$dir,NULL).'"> /'.$s_dir.'</a>
+				    <a href="'.t3quixplorer_div::make_link('list',$dir,NULL).'"> /'.$s_dir.'</a>
 				  </td>
 				</tr>';
 		}
@@ -116,10 +116,10 @@ class t3quixplorer_search{
 		
 		
 	
-		if(t3lib_div::_POST("searchitem")) {
-			//$searchitem=preg_replace('/[^a-z0-9_\.\*\-\?]*/i','',t3lib_div::_POST("searchitem"));
-			$searchitem = htmlspecialchars(t3lib_div::_POST("searchitem"));
-			$subdir=t3lib_div::_POST("subdir")=="y";
+		if(t3lib_div::_POST('searchitem')) {
+			//$searchitem=preg_replace('/[^a-z0-9_\.\*\-\?]*/i','',t3lib_div::_POST('searchitem'));
+			$searchitem = htmlspecialchars(t3lib_div::_POST('searchitem'));
+			$subdir=t3lib_div::_POST('subdir')=='y';
 			$list=$this->make_list($dir,$searchitem,$subdir);
 		} else {
 			$searchitem=NULL;
@@ -134,17 +134,17 @@ class t3quixplorer_search{
 		$this->content[]=' 
 			<br />
 			  <table>
-			    <form name="searchform" action="'.t3quixplorer_div::make_link("search",$dir,NULL).'" method="post">
+			    <form name="searchform" action="'.t3quixplorer_div::make_link('search',$dir,NULL).'" method="post">
 				<tr>
 				  <td>
 				    <input name="searchitem" type="text" size="25" value="'.$searchitem.'">
-					<input type="submit" value="'.$LANG->getLL("message.btnsearch").'">&nbsp;
-					<input type="button" value="'.$LANG->getLL("message.btnclose").'" onClick="javascript:location=\''.t3quixplorer_div::make_link("list",$dir,NULL).'\';">
+					<input type="submit" value="'.$LANG->getLL('message.btnsearch').'">&nbsp;
+					<input type="button" value="'.$LANG->getLL('message.btnclose').'" onClick="javascript:location=\''.t3quixplorer_div::make_link('list',$dir,NULL).'\';">
 				  </td>
 				</tr>
 				<tr>
 				  <td>
-				    <input type="checkbox" name="subdir" value="y"'.($subdir?" checked>":">").$LANG->getLL("message.miscsubdirs").'
+				    <input type="checkbox" name="subdir" value="y"'.($subdir?" checked>":">").$LANG->getLL('message.miscsubdirs').'
 				  </td>
 				</tr>
 				</form>
@@ -162,8 +162,8 @@ class t3quixplorer_search{
 				// Table Header
 				$this->content[]='
 					<tr>
-					  <td width="45%" class="c-headLine">'.$LANG->getLL("message.nameheader").'</td>
-					  <td width="60%" class="c-headLine">'.$LANG->getLL("message.pathheader").'</td>
+					  <td width="45%" class="c-headLine">'.$LANG->getLL('message.nameheader').'</td>
+					  <td width="60%" class="c-headLine">'.$LANG->getLL('message.pathheader').'</td>
 					</tr>
 					<tr>
 					  <td colspan="2"> </td>
@@ -177,14 +177,14 @@ class t3quixplorer_search{
 					  <td colspan="2"> </td>
 					</tr>
 					<tr>
-					  <td class="c-headLine">'.count($list).' '.$LANG->getLL("message.miscitems").'</td>
+					  <td class="c-headLine">'.count($list).' '.$LANG->getLL('message.miscitems').'</td>
 					  <td class="c-headLine"> </td>
 					</tr>
 					';
 			} else {
 				$this->content[]='
 				   <tr>
-				     <td><br /><br />'.$LANG->getLL("message.miscnoresult").'</td>
+				     <td><br /><br />'.$LANG->getLL('message.miscnoresult').'</td>
 				   </tr>';
 			}
 			$this->content[]='
@@ -194,12 +194,12 @@ class t3quixplorer_search{
 				 </table>';
 		}
 		
-		return implode("",$this->content);
+		return implode('',$this->content);
 	}
 }
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_search.php"])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_search.php"]);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_search.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_search.php']);
 }
 
 ?>

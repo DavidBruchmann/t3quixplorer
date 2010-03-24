@@ -40,7 +40,7 @@
 ****************************************************************/
 
 
-require_once ("t3quixplorer_div.php");
+require_once ('t3quixplorer_div.php');
 require_once(PATH_t3lib.'class.t3lib_basicfilefunc.php');
 
 
@@ -52,7 +52,7 @@ class t3quixplorer_upload{
 		$this->content=array();
 	
 		// Execute
-		if(t3lib_div::_POST("confirm") && t3lib_div::_POST("confirm")=="true") {
+		if(t3lib_div::_POST('confirm') && t3lib_div::_POST('confirm')=='true') {
 			$basicFileObj = t3lib_div::makeInstance('t3lib_basicFileFunctions');
 			$cnt=count($_FILES['userfile']['name']);
 
@@ -74,21 +74,21 @@ class t3quixplorer_upload{
 				$abs = t3quixplorer_div::get_abs_item($dir,$items[$i]);
 				if($items[$i]=="" || $up_err==4) continue;
 				if($up_err==1 || $up_err==2) {
-					$errors[$i]=$LANG->getLL("error.miscfilesize");
+					$errors[$i]=$LANG->getLL('error.miscfilesize');
 					$err=true;	continue;
 				}
 				if($up_err==3) {
-					$errors[$i]=$LANG->getLL("error.miscfilepart");
+					$errors[$i]=$LANG->getLL('error.miscfilepart');
 					$err=true;	continue;
 				}
 				if(!@is_uploaded_file($tmp)) {
-					$errors[$i]=$LANG->getLL("error.uploadfile");
+					$errors[$i]=$LANG->getLL('error.uploadfile');
 					$err=true;	continue;
 				}
 				if(@file_exists($abs)) {
-					$existaction = t3lib_div::_GP("existaction");
+					$existaction = t3lib_div::_GP('existaction');
 					if($existaction == 'abort'){
-						$errors[$i]=$LANG->getLL("error.itemdoesexist");
+						$errors[$i]=$LANG->getLL('error.itemdoesexist');
 						$err=true;	
 						continue;
 					} elseif($existaction == 'rename'){
@@ -97,7 +97,7 @@ class t3quixplorer_upload{
 				}
 				
 				// Upload
-				if(function_exists("move_uploaded_file")) {
+				if(function_exists('move_uploaded_file')) {
 					$ok = @move_uploaded_file($tmp, $abs);
 				} else {
 					$ok = @copy($tmp, $abs);
@@ -105,21 +105,21 @@ class t3quixplorer_upload{
 				}
 				
 				if($ok===false) {
-					$errors[$i]=$LANG->getLL("error.uploadfile");
+					$errors[$i]=$LANG->getLL('error.uploadfile');
 					$err=true;	continue;
 				}
 			}
 
 			if($err) {			// there were errors
-				$err_msg="";
+				$err_msg='';
 				for($i=0;$i<$cnt;$i++) {
 					if($errors[$i]==NULL) continue;
-					$err_msg .= $items[$i]." : ".$errors[$i].'<br />';
+					$err_msg .= $items[$i].' : '.$errors[$i].'<br />';
 				}
 				t3quixplorer_div::showError($err_msg);
 			}
 			
-			header("Location: ".t3quixplorer_div::make_link("list",$dir,NULL));
+			header('Location: '.t3quixplorer_div::make_link('list',$dir,NULL));
 			return;
 		}
 		
@@ -127,7 +127,7 @@ class t3quixplorer_upload{
 		// List
 		$this->content[]='
 		  <br />
-		  <form enctype="multipart/form-data" action="'.t3quixplorer_div::make_link("upload",$dir,NULL).'" method="POST">
+		  <form enctype="multipart/form-data" action="'.t3quixplorer_div::make_link('upload',$dir,NULL).'" method="POST">
 		    <input type="hidden" name="MAX_FILE_SIZE" value="'.t3quixplorer_div::get_max_file_size().'">
 			<input type="hidden" name="confirm" value="true">
 		  <table>
@@ -163,23 +163,23 @@ class t3quixplorer_upload{
 		  <table>
 		    <tr>
 			  <td>
-			    <input type="submit" value="'.$LANG->getLL("message.btnupload").'">
+			    <input type="submit" value="'.$LANG->getLL('message.btnupload').'">
 			  </td>
 			  <td>
-			    <input type="button" value="'.$LANG->getLL("message.btncancel").'" onClick="javascript:location=\''.t3quixplorer_div::make_link("list",$dir,NULL).'\';">
+			    <input type="button" value="'.$LANG->getLL('message.btncancel').'" onClick="javascript:location=\''.t3quixplorer_div::make_link('list',$dir,NULL).'\';">
 			  </td>
 			</tr>
 		  </form>
 		  </table>
 		  <br />';
 		
-		return implode("",$this->content);
+		return implode('',$this->content);
 	}
 
 
 }
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_upload.php"])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_upload.php"]);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_upload.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_upload.php']);
 }
 ?>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description></description>
+        <type></type>
+        <csh_table></csh_table>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="be_groups.tx_t3quixplorer_homedir">Home directory</label>
+            <label index="be_users.tx_t3quixplorer_homedir">Home directory</label>
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="default" type="array">
+            <label index="be_groups.tx_t3quixplorer_homedir" type="integer">3555522</label>
+            <label index="be_users.tx_t3quixplorer_homedir" type="integer">3555522</label>
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="default" type="array">
+        </languageKey>
+    </orig_text>
+</T3locallang>

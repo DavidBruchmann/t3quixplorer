@@ -29,7 +29,7 @@
  */
 /***************************************************************/
 
-require_once ("t3quixplorer_div.php");
+require_once ('t3quixplorer_div.php');
 
 
 class t3quixplorer_extract{
@@ -37,7 +37,7 @@ class t3quixplorer_extract{
 
 	function main($dir,$item){
 
-		$this->overwrite = t3lib_div::_GP("overwrite");
+		$this->overwrite = t3lib_div::_GP('overwrite');
 
 
 		global $LANG;
@@ -47,16 +47,16 @@ class t3quixplorer_extract{
 		$abs_item=t3quixplorer_div::get_abs_item($dir,$item);
 
 		
-		if(t3lib_div::_GP("cancel")){
-			header("Location: ".t3quixplorer_div::make_link("list",$dir,NULL));
+		if(t3lib_div::_GP('cancel')){
+			header('Location: '.t3quixplorer_div::make_link('list',$dir,NULL));
 		}
 
 
-		if(t3lib_div::_GP("do_extract")){
+		if(t3lib_div::_GP('do_extract')){
 			$this->unpack($abs_item);
-			header("Location: ".t3quixplorer_div::make_link("list",$dir,NULL));
+			header('Location: '.t3quixplorer_div::make_link('list',$dir,NULL));
 		} else {
-			$this->content[] = '<form method="post" action="'.t3quixplorer_div::make_link("extract",$dir,$item).'">';
+			$this->content[] = '<form method="post" action="'.t3quixplorer_div::make_link('extract',$dir,$item).'">';
 
 
 			
@@ -71,7 +71,7 @@ class t3quixplorer_extract{
 				';
 
 				foreach ($fileList as $file) {
-					if($file == ".") continue;
+					if($file == '.') continue;
 
 					$this->content[] = '<option value="'.$file.'">'.$file.'</option>';
 				}
@@ -83,7 +83,7 @@ class t3quixplorer_extract{
 			$this->content[]= '<input type="submit" name="cancel" value="'.$LANG->getLL('message.btncancel').'">';
 			//$this->content[]= '<input type="submit" name="test" value="TEST">';
 			$this->content[]= '</form>';
-			return implode("",$this->content);
+			return implode('',$this->content);
 		}
 
 	}
@@ -234,7 +234,7 @@ class t3quixplorer_extract{
 		}
 
 
-		$filesinarchive = t3lib_div::_GP("filesinarchive"); 
+		$filesinarchive = t3lib_div::_GP('filesinarchive'); 
 		if(is_array($filesinarchive) && !empty($filesinarchive)){
 			foreach($filesinarchive as $filetoextract){
 				$cmd .= ' "'.$filetoextract.'"';
@@ -283,7 +283,7 @@ class t3quixplorer_extract{
 			$cmd = 'tar -xzvkf "'.$file.'"';
 		}
 
-		$filesinarchive = t3lib_div::_GP("filesinarchive"); 
+		$filesinarchive = t3lib_div::_GP('filesinarchive'); 
 		if(is_array($filesinarchive) && !empty($filesinarchive)){
 			foreach($filesinarchive as $filetoextract){
 				$cmd .= ' "'.$filetoextract.'"';
@@ -318,7 +318,7 @@ class t3quixplorer_extract{
 			$cmd = 'tar -xjvkf "'.$file.'"';
 		}
 
-		$filesinarchive = t3lib_div::_GP("filesinarchive"); 
+		$filesinarchive = t3lib_div::_GP('filesinarchive'); 
 		if(is_array($filesinarchive) && !empty($filesinarchive)){
 			foreach($filesinarchive as $filetoextract){
 				$cmd .= ' "'.$filetoextract.'"';
@@ -341,7 +341,7 @@ class t3quixplorer_extract{
 
 }
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_extract.php"])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_extract.php"]);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_extract.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_extract.php']);
 }
 ?>

@@ -141,10 +141,10 @@ class t3quixplorer_zipfile {
 //------------------------------------------------------------------------------
 // File functions
 	function add($dir, $name) {
-		$item=$dir."/".$name;
+		$item=$dir.'/'.$name;
 		
 		if(@is_file($item)) {
-			if(($fp=fopen($item,"rb"))===false) return false;
+			if(($fp=fopen($item,'rb'))===false) return false;
 			$data=fread($fp,filesize($item));
 			fclose($fp);
 			$this->add_data($data,$name,filemtime($item));
@@ -152,8 +152,8 @@ class t3quixplorer_zipfile {
 		} elseif(@is_dir($item)) {
 			if(($handle=opendir($item))===false) return false;
 			while(($file=readdir($handle))!==false) {
-				if(($file==".." || $file==".")) continue;
-				if(!$this->add($dir,$name."/".$file)) return false;
+				if(($file==".." || $file=='.')) continue;
+				if(!$this->add($dir,$name.'/'.$file)) return false;
 			}
 			closedir($handle);
 			return true;
@@ -163,15 +163,15 @@ class t3quixplorer_zipfile {
 	}
 	
 	function save($name) {
-		if(($fp=fopen($name,"wb"))===false) return false;
+		if(($fp=fopen($name,'wb'))===false) return false;
 		fwrite($fp, $this->contents());
 		fclose($fp);
 		return true;
 	}
 }
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_zipfile.php"])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_zipfile.php"]);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_zipfile.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_zipfile.php']);
 }
 
 ?>

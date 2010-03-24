@@ -43,35 +43,35 @@ class t3quixplorer_mkitem{
 	function main($dir) {		
 		global $LANG;
 
-		$mkname=t3lib_div::_GP("mkname");
-		$mktype=t3lib_div::_GP("mktype");
+		$mkname=t3lib_div::_GP('mkname');
+		$mktype=t3lib_div::_GP('mktype');
 		
 		$mkname=basename(stripslashes($mkname));
-		if($mkname=="") t3quixplorer_div::showError($LANG->getLL("error.miscnoname"));
+		if($mkname=='') t3quixplorer_div::showError($LANG->getLL('error.miscnoname'));
 		
 		$new = t3quixplorer_div::get_abs_item($dir,$mkname);
 
-		if(!preg_match('/[a-zA-Z0-9\.-_]+/',$mkname)) t3quixplorer_div::showError($mkname.": ".$LANG->getLL("error.invalidfilename"));
-		if(@file_exists($new)) t3quixplorer_div::showError($mkname.": ".$LANG->getLL("error.itemdoesexist"));
+		if(!preg_match('/[a-zA-Z0-9\.-_]+/',$mkname)) t3quixplorer_div::showError($mkname.': '.$LANG->getLL('error.invalidfilename'));
+		if(@file_exists($new)) t3quixplorer_div::showError($mkname.': '.$LANG->getLL('error.itemdoesexist'));
 		
-		if($mktype!="file") {
+		if($mktype!='file') {
 			$ok = t3lib_div::mkdir($new);
-			$err=$LANG->getLL("error.createdir");
+			$err=$LANG->getLL('error.createdir');
 		} else {
 			//$ok=@touch($new);
 			$ok = t3lib_div::writeFile($new,'');
-			$err=$LANG->getLL("error.createfile");
+			$err=$LANG->getLL('error.createfile');
 		}
 		
 		if($ok===false) t3quixplorer_div::showError($err);
 		
-		header("Location: ".t3quixplorer_div::make_link("list",$dir,NULL));
+		header('Location: '.t3quixplorer_div::make_link('list',$dir,NULL));
 
 	}
 
 }
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_mkitem.php"])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/t3quixplorer/mod1/t3quixplorer_mkitem.php"]);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_mkitem.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3quixplorer/mod1/t3quixplorer_mkitem.php']);
 }
 ?>

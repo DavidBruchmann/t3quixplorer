@@ -571,7 +571,7 @@ class t3quixplorer_listdir{
 					  </a>									
 					</td>';
 
-		if(get_cfg_var('file_uploads')) {
+		if(get_cfg_var('file_uploads') || ini_get('file_uploads')) {
 			$this->content[]='
 					<td>
 					  <a href="'.t3quixplorer_div::make_link('upload',$dir,NULL).'">

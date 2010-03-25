@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *  
-*  (c) 2004 Mads Brunn (brunn@mail.dk)
+*  (c) 2004 Mads Brunn (madsbrunn@gmail.com)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is 
@@ -25,7 +25,7 @@
  * class 'quixplorer_upload' for the 't3quixplorer' extension.
  * functions for file upload
  *
- * @author	Mads Brunn <brunn@mail.dk>
+ * @author	Mads Brunn <madsbrunn@gmail.com>
  */
 /***************************************************************
 

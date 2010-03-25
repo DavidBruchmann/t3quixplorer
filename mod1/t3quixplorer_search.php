@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *  
-*  (c) 2004 Mads Brunn (brunn@mail.dk)
+*  (c) 2004 Mads Brunn (madsbrunn@gmail.com)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is 
@@ -26,7 +26,7 @@
  * contains functions to display searchform and searchresults and
  * to search for files and folders 
  *
- * @author	Mads Brunn <brunn@mail.dk>
+ * @author	Mads Brunn <madsbrunn@gmail.com>
  */
 /***************************************************************
 

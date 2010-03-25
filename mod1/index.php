@@ -80,7 +80,7 @@ class tx_t3quixplorer_module1 extends t3lib_SCbase {
 
 		$GLOBALS['T3Q_VARS'] = array();
 		$config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['t3quixplorer']);
-		$GLOBALS['T3Q_VARS'] = array_merge($GLOBALS['T3Q_VARS'],$config);
+		if (is_array($config)) $GLOBALS['T3Q_VARS'] = array_merge($GLOBALS['T3Q_VARS'],$config);
 
 		if(!strlen(trim($GLOBALS['T3Q_VARS']['editable_ext']))){
 			$GLOBALS['T3Q_VARS']['editable_ext'] = "\.phpcron$|\.ts$|\.tmpl$|\.txt$|\.php$|\.php3$|\.phtml$|\.inc$|\.sql$|\.pl$|\.htm$|\.html$|\.shtml$|\.dhtml$|\.xml$|\.js$|\.css$|\.cgi$|\.cpp$\.c$|\.cc$|\.cxx$|\.hpp$|\.h$|\.pas$|\.p$|\.java$|\.py$|\.sh$\.tcl$|\.tk$";

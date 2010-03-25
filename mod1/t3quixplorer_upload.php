@@ -103,6 +103,7 @@ class t3quixplorer_upload{
 					$ok = @copy($tmp, $abs);
 					@unlink($tmp);	// try to delete...
 				}
+				t3lib_div::fixPermissions($abs);
 				
 				if($ok===false) {
 					$errors[$i]=$LANG->getLL('error.uploadfile');

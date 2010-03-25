@@ -190,7 +190,7 @@ class t3quixplorer_listdir{
 			//link
 			
 			$this->content[]='
-					<td nowrap="nowrap"><a href="'.$link.'" target="'.$target.'"><img align="absmiddle" border="0" '.t3lib_iconWorks::skinImg($BACK_PATH,$imagepath.t3quixplorer_div::get_mime_type($dir, $item, 'img'),'width="16" height="16"',0).' alt="">&nbsp;'.t3lib_div::fixed_lgd($item,47).'</a></td>
+					<td nowrap="nowrap"><a href="'.$link.'" target="'.$target.'"><img align="absmiddle" border="0" '.t3lib_iconWorks::skinImg($BACK_PATH,$imagepath.t3quixplorer_div::get_mime_type($dir, $item, 'img'),'width="16" height="16"',0).' alt="">&nbsp;'.t3lib_div::fixed_lgd_cs($item,47).'</a></td>
 					';
 
 

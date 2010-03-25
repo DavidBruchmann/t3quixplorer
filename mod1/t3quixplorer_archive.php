@@ -108,6 +108,8 @@ class t3quixplorer_archive{
 	
 	function zip_items($dir,$name) {
 		global $LANG;
+		
+		$name .= (strtolower(pathinfo($name, PATHINFO_EXTENSION))!='zip') ? '.zip' : '';
 	
 		$selitems = t3lib_div::_POST('selitems');
 	

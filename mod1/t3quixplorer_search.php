@@ -83,8 +83,8 @@ class t3quixplorer_search{
 		$cnt = count($list);
 		for($i=0;$i<$cnt;++$i) {
 			$dir = $list[$i][0];	$item = $list[$i][1];
-			$s_dir=t3lib_div::fixed_lgd($dir,62);	
-			$s_item=t3lib_div::fixed_lgd($item,45);
+			$s_dir=t3lib_div::fixed_lgd_cs($dir,62);
+			$s_item=t3lib_div::fixed_lgd_cs($item,45);
 			$link = '';	$target = '';
 			
 			if(t3quixplorer_div::get_is_dir($dir,$item)) {

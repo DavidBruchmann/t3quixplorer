@@ -88,7 +88,7 @@ class tx_t3quixplorer_module1 extends t3lib_SCbase {
 
 		
 		if(!strlen(trim($GLOBALS['T3Q_VARS']['home_dir']))){
-			$GLOBALS['T3Q_VARS']['home_dir'] = preg_replace('/\/$/','',PATH_site);
+			$GLOBALS["T3Q_VARS"]["home_dir"] = preg_replace('/\/$/','',PATH_site);
 		}
 
 		if(!strlen(trim($GLOBALS['T3Q_VARS']['home_url']))){

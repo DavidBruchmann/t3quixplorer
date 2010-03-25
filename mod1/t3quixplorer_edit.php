@@ -260,7 +260,7 @@ class t3quixplorer_edit{
 			$content[] = '<table class="bgColor5"><tr>';
 			
 			$inputCode = $fileContent;
-			$lines = split("\n",$inputCode);
+			$lines = explode("\n",$inputCode);
 
 			foreach($lines as $linenumber => $line){
 				if(preg_match('/\s*\bfunction\b\s*([a-z_][a-z0-9_]*)\s*/iA', $line, $match)) {

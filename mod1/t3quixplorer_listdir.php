@@ -77,7 +77,11 @@ class t3quixplorer_listdir{
 		
 		// make tables 
 		// also 'return' total filesize & total number of items
-		
+
+		// check if dir exists
+		if (!is_dir(t3quixplorer_div::get_abs_dir($dir))) {
+			$dir = '';
+		}
 		
 		// Open directory
 		$handle = @opendir(t3quixplorer_div::get_abs_dir($dir));
@@ -186,8 +190,8 @@ class t3quixplorer_listdir{
 			//link
 			
 			$this->content[]='
-				        <td nowrap="nowrap"><a href="'.$link.'" target="'.$target.'"><img align="absmiddle" border="0" '.t3lib_iconWorks::skinImg($BACK_PATH,$imagepath.t3quixplorer_div::get_mime_type($dir, $item, 'img'),'width="16" height="16"',0).' alt="">&nbsp;'.t3lib_div::fixed_lgd($item,47).'</a></td>
-						';
+					<td nowrap="nowrap"><a href="'.$link.'" target="'.$target.'"><img align="absmiddle" border="0" '.t3lib_iconWorks::skinImg($BACK_PATH,$imagepath.t3quixplorer_div::get_mime_type($dir, $item, 'img'),'width="16" height="16"',0).' alt="">&nbsp;'.t3lib_div::fixed_lgd($item,47).'</a></td>
+					';
 
 
 			$this->content[]='
@@ -481,9 +485,6 @@ class t3quixplorer_listdir{
 
 
 
-		if(!is_dir(t3quixplorer_div::get_abs_dir($dir))) {
-			$dir = '';
-		}
 		$dir_up = dirname($dir);
 		if($dir_up=='.') $dir_up = '';
 		if($dir_up=='') $dir_up = ' ';
@@ -493,7 +494,7 @@ class t3quixplorer_listdir{
 		}
 
 		$this->make_tables($dir);
-		$s_dir = t3lib_div::fixed_lgd($dir,47);
+		$s_dir = t3lib_div::fixed_lgd_cs($dir,47);
 		$imagepath = t3lib_extMgm::extRelPath('t3quixplorer').'mod1/_img/';
 
 		$_img = '&nbsp;<img width="10" height="10" border="0" align="absmiddle" src="'.t3lib_extMgm::extRelPath('t3quixplorer').'mod1/_img/';

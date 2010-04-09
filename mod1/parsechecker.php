@@ -32,7 +32,7 @@ class parseChecker{
 		
 		$command = '';
 		
-		if(trim($config['php_path'])){
+		if(trim($this->config['php_path'])){
 			$command .= $this->config['php_path'];
 		} else {
 			$command .= 'php'.(TYPO3_OS=='WIN' ? '.exe' : '');	

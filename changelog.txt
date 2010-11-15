@@ -57,3 +57,8 @@ Version 1.7 	(23-1-2007)
 	j) Corrected a bug in t3quixplorer::make_link that made it impossible to acces folders or edit files with special chars like ' ' or '+' in the name.
 	k) added parse checking for php-scripts
 	l) Changed tabbing in textarea to use TYPO3's own tab.js script
+
+Version 1.7.2 	(15-11-2010)
+	a) Bug: 14323: allow_nonadmins don't work (THX to Tapio Markula)
+	b) Bug: 15193: eregi is deprecated (THX to Erik Svendsen)
+	

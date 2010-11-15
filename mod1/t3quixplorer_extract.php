@@ -100,15 +100,15 @@ class t3quixplorer_extract{
 	 */
 	function getList($file)	{
 		// Handle ZIP Extensions
-		if (eregi('\.zip$', $file)) {
+		if (preg_match('/\.zip$/i', $file)) {
 			return $this->zipGetList($file);
 		}
 		// Handle TAR.GZ Extensions
-		if (eregi('\.tar\.gz$', $file) || eregi('\.tgz$', $file)) {
+		if (preg_match('/\.tar\.gz$/i', $file) || preg_match('/\.tgz$/i', $file)) {
 			return $this->targzGetList($file);
 		}
 		// Handle TAR.BZ2 Extensions
-		if (eregi('\.tar\.bz2$', $file) || eregi('\.tbz2$', $file)) {
+		if (preg_match('/\.tar\.bz2$/i', $file) || preg_match('/\.tbz2$/i', $file)) {
 			return $this->tarbz2GetList($file);
 		}
 		return false;
@@ -194,15 +194,15 @@ class t3quixplorer_extract{
 	 */
 	function unpack($file)	{
 		// Handle ZIP Extensions
-		if (eregi('\.zip$', $file)) {
+		if (preg_match('/\.zip$/i', $file)) {
 			return $this->zipUnpack($file);
 		}
 		// Handle TAR.GZ Extensions
-		if (eregi('\.tar\.gz$', $file) || eregi('\.tgz$', $file)) {
+		if (preg_match('/\.tar\.gz$/i', $file) || preg_match('/\.tgz$/i', $file)) {
 			return $this->targzUnpack($file);
 		}
 		// Handle TAR.BZ2 Extensions
-		if (eregi('\.tar\.bz2$', $file) || eregi('\.tbz2$', $file)) {
+		if (preg_match('/\.tar\.bz2$/i', $file) || preg_match('/\.tbz2$/i', $file)) {
 			return $this->tarbz2Unpack($file);
 		}
 		return false;
